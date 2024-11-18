@@ -18,10 +18,20 @@
         <selenium-firefox-driver>4.25.0</selenium-firefox-driver>
         <selenium-safari-driver>4.25.0</selenium-safari-driver>
         <selenium-edge-driver>4.25.0</selenium-edge-driver>
+        <javafaker>1.0.2</javafaker>
 
     </properties>
 
+
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -61,5 +71,6 @@
 
 
     </dependencies>
+
 
 </project>
