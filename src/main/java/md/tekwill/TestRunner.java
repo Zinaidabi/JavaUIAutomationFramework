@@ -2,6 +2,7 @@ package md.tekwill;
 
 import md.tekwill.managers.DriverManager;
 import md.tekwill.managers.RandomDataManager;
+import md.tekwill.managers.ScrollManager;
 import org.openqa.selenium.*;
 
 public class TestRunner {
@@ -41,11 +42,12 @@ public class TestRunner {
         System.out.println("Password: " + passwordData);
         passwordInput.sendKeys(passwordData);
 
-        WebElement privacyToogleBar = driver.findElement(By.name("agree"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", privacyToogleBar);
+        WebElement privacyToggleBar = driver.findElement(By.name("agree"));
+        ScrollManager.scrollToElement(privacyToggleBar);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", privacyToggleBar);
         Thread.sleep(500);
 
-        privacyToogleBar.click();
+        privacyToggleBar.click();
 
 
         WebElement continueButton = driver.findElement(By.cssSelector("button[type='submit']"));
