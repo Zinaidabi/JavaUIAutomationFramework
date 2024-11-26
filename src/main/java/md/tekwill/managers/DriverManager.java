@@ -46,6 +46,12 @@ public class DriverManager {
         return driver;
     }
 
+    public void quitTheDriver() {
+        driver.quit();
+        driver = null;
+        instance = null;
+    }
+
 }
 
 
