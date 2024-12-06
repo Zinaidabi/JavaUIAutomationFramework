@@ -36,14 +36,5 @@ public class RegisterPage extends Page {
         System.out.println("The form was completed for: " + email + " and password: " + password);
     }
 
-    public void enableTheToggleBar() {
-        ScrollManager.scrollToElement(privacyToggleBar);
-        privacyToggleBar.click();
-    }
-
-    public void clickOnTheContinueBtn() {
-        ScrollManager.scrollToElement(continueBtn);
-        continueBtn.click();
-    }
 
 }

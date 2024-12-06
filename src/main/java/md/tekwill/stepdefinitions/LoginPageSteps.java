@@ -17,9 +17,4 @@ public class LoginPageSteps {
         loginPage.completeLoginForm(collectedDataList.get(0), collectedDataList.get(1));
 
     }
-
-    @When("the loginBTN is clicked")
-    public void theLoginBTNIsClicked() {
-        loginPage.clickTheLoginBtn();
-    }
 }
