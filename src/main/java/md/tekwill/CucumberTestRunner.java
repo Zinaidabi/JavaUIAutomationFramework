@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/main/java/md/tekwill/features",
         glue = "md.tekwill.stepdefinitions",
-        tags = "@run"
+        tags = ""
 
 )
 public class CucumberTestRunner {

@@ -3,11 +3,17 @@ package md.tekwill.stepdefinitions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import md.tekwill.managers.ConfigReaderManager;
 import md.tekwill.managers.DriverManager;
+import md.tekwill.managers.ScrollManager;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 public class GenericSteps {
@@ -21,10 +27,11 @@ public class GenericSteps {
         Assertions.assertTrue(containsKeyword, "The URL contains : " + containsKeyword);
     }
 
-    @Given("The {string} is accessed")
-    public void theIsAccessed(String collectedLink) {
-        driver.get(collectedLink);
-        System.out.println("The accessed link is:" + collectedLink);
+    @Given("The {string} endpoint is accessed")
+    public void theIsAccessed(String endpoint) {
+        String fullLink= ConfigReaderManager.getProperty("baseUrl") + endpoint;
+        driver.get(fullLink);
+        System.out.println("The accessed link is:" + fullLink);
     }
 
     @And("a thread sleep of {int} seconds is executed")
@@ -46,5 +53,15 @@ public class GenericSteps {
             Assertions.assertTrue(messageIsDisplayed, "The error message is displayed");
         });
 
+    }
+
+    @When("the {string} from {string} is clicked")
+    public void theFromIsClicked(String clickableElement, String pageName) throws Exception {
+        Class classInstance = Class.forName("md.tekwill.pageobjects." + pageName);
+        Field webClickableField = classInstance.getDeclaredField(clickableElement);
+        webClickableField.setAccessible(true);
+        WebElement webClickableElement = (WebElement) webClickableField.get(classInstance.getConstructor(WebDriver.class).newInstance(driver));
+        ScrollManager.scrollToElement(webClickableElement);
+        webClickableElement.click();
     }
 }
