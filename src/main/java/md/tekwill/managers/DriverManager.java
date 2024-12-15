@@ -7,10 +7,13 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.time.Duration;
+
 public class DriverManager {
     private static DriverManager instance;
     private WebDriver driver;
     private static final String Web_Driver_Type = ConfigReaderManager.getProperty("browserType");
+
 
     private DriverManager() {
         switch (Web_Driver_Type.toUpperCase()) {
@@ -37,6 +40,10 @@ public class DriverManager {
                 System.out.println("The browser type is not defined: " + Web_Driver_Type);
 
         }
+        int implicitWaitTime = Integer.valueOf(ConfigReaderManager.getProperty("implicitWaitTime"));
+        int pageLoadTime = Integer.valueOf(ConfigReaderManager.getProperty("pageLoadTime"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
     }
 
     public static DriverManager getInstance() {
