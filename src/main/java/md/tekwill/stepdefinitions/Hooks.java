@@ -2,11 +2,18 @@ package md.tekwill.stepdefinitions;
 
 import io.cucumber.java.*;
 import md.tekwill.managers.DriverManager;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Hooks {
+
+    private static final Logger logger = LogManager.getLogger(Hooks.class);
+
     @BeforeAll
     public static void beforeAll() {
-        System.out.println("The execution of the test suite started");
+        logger.log(Level.INFO,"The execution of the test suite started" );
+
     }
 
     @Before
@@ -16,12 +23,12 @@ public class Hooks {
 
     @After
     public void executeAfterEachTest() {
-        System.out.println("The test is completed");
+        logger.log(Level.INFO,"The test is completed");
         DriverManager.getInstance().quitTheDriver();
     }
 
     @AfterAll
     public static void afterAll() {
-        System.out.println("The test execution finished ");
+        logger.log(Level.INFO,"The test execution finished ");
     }
 }
